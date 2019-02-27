@@ -1,8 +1,7 @@
-package mp01.examples.messaging.kafka.participantsecurityenquiry.serivce;
+package mp01.examples.messaging.kafka.participantsecurityenquiry.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mp01.examples.messaging.kafka.participantsecurityenquiry.domain.Account;
 import mp01.examples.messaging.kafka.participantsecurityenquiry.domain.kafka.AccountResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package mp01.examples.messaging.kafka.participantsecurityenquiry.serivce;
+package mp01.examples.messaging.kafka.participantsecurityenquiry.service;
 
 import mp01.examples.messaging.kafka.participantsecurityenquiry.domain.Account;
 import mp01.examples.messaging.kafka.participantsecurityenquiry.repository.PSERepository;

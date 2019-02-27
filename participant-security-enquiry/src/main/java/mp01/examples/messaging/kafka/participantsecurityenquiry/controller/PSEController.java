@@ -4,7 +4,7 @@ import mp01.examples.messaging.kafka.participantsecurityenquiry.domain.Account;
 import mp01.examples.messaging.kafka.participantsecurityenquiry.domain.rest.AccountCreateRequest;
 import mp01.examples.messaging.kafka.participantsecurityenquiry.domain.rest.AccountCreateResponse;
 import mp01.examples.messaging.kafka.participantsecurityenquiry.repository.PSERepository;
-import mp01.examples.messaging.kafka.participantsecurityenquiry.serivce.PSEService;
+import mp01.examples.messaging.kafka.participantsecurityenquiry.service.PSEService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
