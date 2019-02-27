@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "654daf22-8066-417d-8db4-c6d4736e2fb9",
+		"name": "PSE-CSS-Kafka-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Insert Account To PSE Service",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"participantId\" : 2828,\n\t\"ISIN\" : \"hello\",\n\t\"amount\" : 124.1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/pse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Participant ID from PSE Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Account from PSE Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}

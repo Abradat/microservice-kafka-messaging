@@ -1,0 +1,64 @@
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    depends_on: 
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: ${DOCKER_HOST_IP}
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+      KAFKA_CREATE_TOPICS: "pse-topic:1:1,css-topic:1:1"
+  postgres:
+    build: ./postgres
+    ports:
+      - "5432:5432"
+    environment: 
+      POSTGRES_USER: postgresuser
+      POSTGRES_PASSWORD: postgrespw
+  pse-service:
+    build: ./participant-security-enquiry
+    ports:
+      - "8080:8080"
+    volumes: 
+      - ~/.m2:/root/.m2
+    depends_on:
+      - postgres
+      - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/pse_service
+      SPRING_DATASOURCE_USERNAME: postgresuser
+      SPRING_DATASOURCE_PASSWORD: postgrespw
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZOOKEEPER_CONNECTION_STRING: zookeeper:2181
+      JAVA_OPTS: -Xmx192m
+      SPRING_SLEUTH_ENABLED: "true"
+      SPRING_SLEUTH_SAMPLER_PROBABILITY: 1
+      DOCKER_HOST_IP: ${DOCKER_HOST_IP}
+    command: mvn clean package spring-boot:run
+  css-service:
+    build: ./central-security-settlement
+    ports:
+      - "8081:8080"
+    volumes: 
+      - ~/.m2:/root/.m2
+    depends_on:
+      - postgres
+      - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/css_service
+      SPRING_DATASOURCE_USERNAME: postgresuser
+      SPRING_DATASOURCE_PASSWORD: postgrespw
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      ZOOKEEPER_CONNECTION_STRING: zookeeper:2181
+      JAVA_OPTS: -Xmx192m
+      SPRING_SLEUTH_ENABLED: "true"
+      SPRING_SLEUTH_SAMPLER_PROBABILITY: 1
+      DOCKER_HOST_IP : ${DOCKER_HOST_IP}
+    command: mvn clean package spring-boot:run
